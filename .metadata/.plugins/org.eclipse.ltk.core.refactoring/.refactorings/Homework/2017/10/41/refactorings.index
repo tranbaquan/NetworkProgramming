@@ -1,0 +1,8 @@
+1507446997594	Move compilation unit
+1507561545806	Rename type 'dirTree'
+1507561657406	Rename local variable 'resutl'
+1507602907632	Rename type 'CopyFile'
+1507602940399	Rename type 'DeleteFile'
+1507608013161	Rename type 'FileSplit'
+1507608260180	Rename local variable 'partion'
+1507608373103	Rename local variable 'source'
