@@ -15,7 +15,6 @@ public class FileClient {
 	public FileClient() {
 		clientDir = "C:\\source";
 	}
-
 	public void request() {
 		try {
 			this.socket = new Socket(HOST, PORT);
