@@ -1,13 +1,8 @@
 package tbq.rmi.file;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
+import java.io.*;
+import java.rmi.*;
+import java.rmi.server.*;
 import java.util.ArrayList;
 
 import tbq.rmi.model.Data;
@@ -22,7 +17,7 @@ public class FileImpl extends UnicastRemoteObject implements IFile {
 	private static final long serialVersionUID = 1L;
 	BufferedOutputStream bos;
 	BufferedInputStream bis;
-	
+
 	protected FileImpl() throws RemoteException {
 		super();
 		data = Data.getData();
@@ -66,7 +61,11 @@ public class FileImpl extends UnicastRemoteObject implements IFile {
 
 	@Override
 	public void writeData(byte[] buff, int length) throws RemoteException {
-
+		try {
+			bos.write(buff, 0, length);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -89,6 +88,17 @@ public class FileImpl extends UnicastRemoteObject implements IFile {
 
 	@Override
 	public byte[] readData() throws RemoteException {
+		try {
+			byte[] buff = new byte[10 * 1024];
+			int length = bis.read(buff);
+			if (length == -1)
+				return null;
+			byte[] result = new byte[length];
+			System.arraycopy(buff, 0, result, 0, length);
+			return result;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
